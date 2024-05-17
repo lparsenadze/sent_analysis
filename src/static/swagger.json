@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server",
+    "version": "1.0.0",
+    "title": "ML Preparation API"
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Returns message showing app is up",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/predict": {
+      "post": {
+        "summary": "ML Prediction",
+        "description": "Provides rating predictions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "prediction request",
+            "in": "body",
+            "description": "JSON data for the api",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictRequestModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User granted access"
+          },
+          "400": {
+            "description": "Invalid request data"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PredictRequestModel": {
+      "type": "object",
+      "properties": {
+        "overall": {
+          "type": "number",
+          "format": "float",
+          "example": 5.0
+        },
+        "verified": {
+          "type": "boolean",
+          "example": true
+        },
+        "reviewTime": {
+          "type": "string",
+          "example": "09 4, 2015"
+        },
+        "reviewerID": {
+          "type": "string",
+          "example": "ALJ66O1Y6SLHA"
+        },
+        "asin": {
+          "type": "string",
+          "example": "B000K2PJ4K"
+        },
+        "style": {
+          "type": "object",
+          "properties": {
+            "Size": {
+              "type": "string",
+              "example": "Big Boys"
+            },
+            "Color": {
+              "type": "string",
+              "example": "Blue/Orange"
+            }
+          }
+        },
+        "reviewerName": {
+          "type": "string",
+          "example": "Tonya B."
+        },
+        "reviewText": {
+          "type": "string",
+          "example": "Great product and price!"
+        },
+        "summary": {
+          "type": "string",
+          "example": "Five Stars"
+        },
+        "unixReviewTime": {
+          "type": "integer",
+          "example": 1441324800
+        }
+      },
+      "required": [
+        "overall",
+        "verified",
+        "reviewTime",
+        "reviewerID",
+        "asin",
+        "reviewerName",
+        "reviewText",
+        "summary",
+        "unixReviewTime"
+      ]
+    }
+  }
+}
